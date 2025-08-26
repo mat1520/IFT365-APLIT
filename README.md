@@ -31,7 +31,7 @@ git clone https://github.com/MrOnie/IFT365-APLIT.git
 cd IFT365-APLIT
 ```
 
-Si quieres clonar el repositorio y solamente usar los paquetes, desde tu main.go puedes importar directamente desde el repositorio de GitHub con:
+Si NO quieres clonar el repositorio y solamente usar los paquetes, desde tu main.go puedes importar directamente desde el repositorio de GitHub con:
 
 ```
 import "github.com/MrOnie/IFT365-APLIT/pkg/math_utils"
