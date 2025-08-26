@@ -1,0 +1,16 @@
+# Binarios de Go
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Archivos de módulos Go
+go.sum
+vendor/
+
+# Archivos de pruebas
+*.test
+
+# Editor
+.vscode/
+.DS_Store
