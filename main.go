@@ -16,7 +16,7 @@ func main() {
 	// --- Demostración del Paquete math_utils ---
 	fmt.Println("\n## Funciones Matemáticas (pkg/math_utils)")
 
-	// Variables Definidas
+	// Variables Definidas (anteriormente usadas puedes quitar el comentario si quieres testear con valores fijos, Recuerda comentar las otras variables)
 	//num1 := 20
 	//num2 := 4
 
@@ -56,6 +56,7 @@ func main() {
 		fmt.Printf("División de %d y %d: %.2f\n", num1, num2, division)
 	}
 
+	// Intento de división por cero para demostrar el manejo de errores
 	_, err = math_utils.Dividir(num1, 0)
 	if err != nil {
 		fmt.Printf("Intento de división por cero: %s\n", err)
@@ -63,8 +64,28 @@ func main() {
 
 	// --- Demostración del Paquete string_utils ---
 	fmt.Println("\n## Funciones de Cadenas (pkg/string_utils)")
-	cadenaOriginal := "Hola Go!"
-	cadenaPalindromo := "Anita lava la tina"
+	// Variables Definidas (anteriormente usadas puedes quitar el comentario si quieres testear con valores fijos, Recuerda comentar las otras variables)
+	//cadenaOriginal := "Hola Go!"
+	//cadenaPalindromo := "Anita lava la tina"
+
+	// Variables sin definir(Las variables se definen aquí para que el usuario pueda ingresarlas)
+	var cadenaOriginal string
+	var cadenaPalindromo string
+
+	// Solicitar entrada del usuario de las variables sin definir
+	fmt.Print("Ingrese una cadena para invertir y contar vocales: ")
+	_, err = fmt.Scanf("%s", &cadenaOriginal)
+	if err != nil {
+		fmt.Println("Error.")
+		return
+	}
+
+	fmt.Print("Ingrese una cadena para verificar si es palíndromo: ")
+	_, err = fmt.Scanf("%s", &cadenaPalindromo)
+	if err != nil {
+		fmt.Println("Error.")
+		return
+	}
 
 	// Invertir cadena
 	fmt.Printf("Cadena original: \"%s\"\n", cadenaOriginal)
