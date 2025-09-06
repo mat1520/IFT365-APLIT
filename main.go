@@ -15,8 +15,29 @@ func main() {
 
 	// --- Demostración del Paquete math_utils ---
 	fmt.Println("\n## Funciones Matemáticas (pkg/math_utils)")
-	num1 := 20
-	num2 := 4
+
+	// Variables Definidas
+	//num1 := 20
+	//num2 := 4
+
+	// Variables sin definir
+	var num1 int
+	var num2 int
+
+	// Solicitar entrada del usuario de las variables sin definir, agregando un manejo de errores
+	fmt.Print("Ingrese el primer número (entero): ")
+	_, err := fmt.Scanf("%d", &num1)
+	if err != nil {
+		fmt.Println("Error al leer el número. Asegúrese de ingresar un entero válido.")
+		return
+	}
+
+	fmt.Print("Ingrese el segundo número (entero): ")
+	_, err = fmt.Scanf("%d", &num2)
+	if err != nil {
+		fmt.Println("Error al leer el número. Asegúrese de ingresar un entero válido.")
+		return
+	}
 
 	// Suma
 	fmt.Printf("Suma de %d y %d: %d\n", num1, num2, math_utils.Sumar(num1, num2))
