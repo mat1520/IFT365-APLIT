@@ -1,13 +1,10 @@
 package main // El paquete 'main' es el punto de entrada de la aplicación
 
 import (
-	"fmt" // Para imprimir en la consola
-	// Importamos nuestros paquetes personalizados.
-	// El path de importación debe coincidir con el nombre de tu módulo y la ruta del paquete.
-	"github.com/MrOnie/IFT365-APLIT/pkg/math_utils"
-	//"./IFT365-APLIT/pkg/math_utils"
-	"github.com/MrOnie/IFT365-APLIT/pkg/string_utils"
-	//"./IFT365-APLIT/pkg/string_utils"
+	"fmt"
+	"github.com/mat1520/IFT365-APLIT/pkg/math_utils"
+	"github.com/mat1520/IFT365-APLIT/pkg/net_simplify"
+	"github.com/mat1520/IFT365-APLIT/pkg/string_utils"
 )
 
 func main() {
@@ -98,5 +95,15 @@ func main() {
 	fmt.Printf("¿\"%s\" es un palíndromo? %t\n", cadenaPalindromo, string_utils.EsPalindromo(cadenaPalindromo))
 	fmt.Printf("¿\"%s\" es un palíndromo? %t\n", cadenaOriginal, string_utils.EsPalindromo(cadenaOriginal))
 
+	// --- Demostración del Paquete net_simplify ---
+	fmt.Println("\n## Funciones de Red (pkg/net_simplify)")
+
+	srv := netsimplify.CreateServer(":8080")
+	err = netsimplify.StartServer(srv)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
 	fmt.Println("\n--- Fin de la Demostración ---")
+
 }
