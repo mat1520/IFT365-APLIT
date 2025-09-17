@@ -1,7 +1,12 @@
 package main // El paquete 'main' es el punto de entrada de la aplicación
 
 import (
+	"bufio"
 	"fmt"
+	"net/http"
+	"os"
+	"strings"
+
 	"github.com/mat1520/IFT365-APLIT/pkg/math_utils"
 	"github.com/mat1520/IFT365-APLIT/pkg/net_simplify"
 	"github.com/mat1520/IFT365-APLIT/pkg/string_utils"
@@ -98,10 +103,42 @@ func main() {
 	// --- Demostración del Paquete net_simplify ---
 	fmt.Println("\n## Funciones de Red (pkg/net_simplify)")
 
+	// registrar handler para la ruta raíz (evita 404)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, "Servidor iniciado correctamente prueba ingresando a http://localhost:8080/")
+	})
+
 	srv := netsimplify.CreateServer(":8080")
-	err = netsimplify.StartServer(srv)
-	if err != nil {
-		fmt.Println("Error:", err)
+
+	// channel para recibir el resultado de ListenAndServe
+	done := make(chan error, 1)
+	go func() {
+		done <- netsimplify.StartServer(srv)
+	}()
+
+	fmt.Println("Servidor creado en el puerto 8080. Ingrese '1' para detenerlo.")
+
+	// esperar a que el usuario ingrese '1'
+	reader := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Print("Ingrese '1' para detener el servidor: ")
+		text, _ := reader.ReadString('\n')
+		if strings.TrimSpace(text) == "1" {
+			break
+		}
+		fmt.Println("Entrada no válida. Intente de nuevo.")
+	}
+
+	// Detener el servidor y esperar el resultado de la goroutine
+	if stopErr := netsimplify.StopServer(srv); stopErr != nil {
+		fmt.Println("Error al detener servidor:", stopErr)
+	}
+
+	if err := <-done; err != nil && err != http.ErrServerClosed {
+		fmt.Println("StartServer devolvió error:", err)
+	} else {
+		fmt.Println("Servidor detenido correctamente.")
 	}
 
 	fmt.Println("\n--- Fin de la Demostración ---")
